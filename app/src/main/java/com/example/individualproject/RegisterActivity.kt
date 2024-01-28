@@ -12,6 +12,8 @@ import android.widget.Toast
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.database
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -20,7 +22,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var registerB: Button
     private lateinit var progressBar: ProgressBar
     private lateinit var auth: FirebaseAuth
-
+    private lateinit var database: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -32,6 +34,7 @@ class RegisterActivity : AppCompatActivity() {
         // [START initialize_auth]
         // Initialize Firebase Auth
         auth = Firebase.auth
+        database = Firebase.database.reference
         // [END initialize_auth]
 
         registerB.setOnClickListener {
@@ -45,6 +48,10 @@ class RegisterActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
+
+                    val userID: String  = auth.currentUser?.uid.toString()
+                    database.child("Users").child(userID).setValue("")
+
                     Log.d(ContentValues.TAG, "createUserWithEmail:success")
                     val intent = Intent(this, LoginActivity::class.java)
                     // start your next activity
@@ -54,9 +61,12 @@ class RegisterActivity : AppCompatActivity() {
                     Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
                     Toast.makeText(
                         baseContext,
-                        "Authentication failed.",
+                        "User is registered with that email already",
                         Toast.LENGTH_SHORT,
                     ).show()
+                    val intent = Intent(this, LoginActivity::class.java)
+                    // start your next activity
+                    startActivity(intent)
                 }
             }
         // [END create_user_with_email]

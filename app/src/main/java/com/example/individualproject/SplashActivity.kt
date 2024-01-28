@@ -5,12 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.auth
+import com.google.firebase.database.FirebaseDatabase
 
 class SplashActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
+    private lateinit var currentUser: FirebaseUser
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
+auth = Firebase.auth
 
         // we used the postDelayed(Runnable, time) method
         // to send a message with a delayed time.
@@ -18,10 +25,16 @@ class SplashActivity : AppCompatActivity() {
 
         // Handler().postDelayed({
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+            currentUser = auth.currentUser!!
+            if (currentUser == null) {
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            } else {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
             finish()
-        }, 3000) // 3000 is the delayed time in milliseconds.
+        }, 1000) // 3000 is the delayed time in milliseconds.
 
     }
 }
