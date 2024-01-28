@@ -81,9 +81,10 @@ class MainActivity : AppCompatActivity() {
                         val username: HashMap<String, String> = HashMap()
                         username.put("name", currentUserID)
                         database.child("Users").child(currentUserID).setValue(username)
-                    }
-                }
 
+                    }
+                    val test = TODO()
+                }
                 override fun onCancelled(error: DatabaseError) {}
             })
 
