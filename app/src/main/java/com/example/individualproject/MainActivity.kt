@@ -27,16 +27,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var group: Button
-    private lateinit var currentUser: FirebaseUser
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         auth = Firebase.auth
-        currentUser = auth.currentUser!!
         database = FirebaseDatabase.getInstance().reference
-
-        if (currentUser == null) {
+        if (auth.currentUser == null) {
             sendUserToLogin()
         } else {
             verifyUserExistance()
@@ -66,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sendUserToLogin() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
 
@@ -83,7 +80,6 @@ class MainActivity : AppCompatActivity() {
                         database.child("Users").child(currentUserID).setValue(username)
 
                     }
-                    val test = TODO()
                 }
                 override fun onCancelled(error: DatabaseError) {}
             })

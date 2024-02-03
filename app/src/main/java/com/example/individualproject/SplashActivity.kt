@@ -13,21 +13,13 @@ import com.google.firebase.database.FirebaseDatabase
 
 class SplashActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
-    private lateinit var currentUser: FirebaseUser
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 auth = Firebase.auth
-
-        // we used the postDelayed(Runnable, time) method
-        // to send a message with a delayed time.
-        //Normal Handler is deprecated , so we have to change the code little bit
-
-        // Handler().postDelayed({
         Handler(Looper.getMainLooper()).postDelayed({
-            currentUser = auth.currentUser!!
-            if (currentUser == null) {
-                val intent = Intent(this, LoginActivity::class.java)
+            if (auth.currentUser == null) {
+                val intent = Intent(this, DefaultActivity::class.java)
                 startActivity(intent)
             } else {
                 val intent = Intent(this, MainActivity::class.java)
