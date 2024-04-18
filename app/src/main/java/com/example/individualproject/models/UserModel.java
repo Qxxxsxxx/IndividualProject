@@ -1,28 +1,22 @@
 package com.example.individualproject.models;
 
-import com.google.firebase.Timestamp;
-
 public class UserModel {
-    private String password;
+
     private String username;
-    private Timestamp timestamp;
+    private Integer planted;
+
+    private UserModel() {
 
 
-    public UserModel() {
     }
-
-    public UserModel(String username, String password, Timestamp timestamp) {
-        this.password = password;
+    public UserModel(String username, Integer planted) {
         this.username = username;
-        this.timestamp = timestamp;
+        this.planted = planted;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public UserModel(String username) {
+        this.username = username;
+        this.planted = 0;
     }
 
     public String getUsername() {
@@ -33,11 +27,16 @@ public class UserModel {
         this.username = username;
     }
 
-    public Timestamp getTimestamp() {
-        return timestamp;
+    public Integer getPlanted() {
+        return planted;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
+    public void setPlanted(Integer planted) {
+        this.planted = planted;
     }
+
+    public String toString(){
+        return username + " planted " + planted;
+    }
+
 }

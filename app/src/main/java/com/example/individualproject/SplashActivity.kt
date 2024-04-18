@@ -1,15 +1,13 @@
 package com.example.individualproject
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
-import com.google.firebase.database.FirebaseDatabase
 
 class SplashActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth

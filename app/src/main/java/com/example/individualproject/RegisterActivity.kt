@@ -2,13 +2,13 @@ package com.example.individualproject
 
 import android.content.ContentValues
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.individualproject.models.UserModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -20,7 +20,6 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var email: EditText
     private lateinit var password: EditText
     private lateinit var registerB: Button
-    private lateinit var progressBar: ProgressBar
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +29,6 @@ class RegisterActivity : AppCompatActivity() {
         email = findViewById(R.id.email)
         registerB = findViewById(R.id.registerButton)
         password = findViewById(R.id.password)
-        progressBar = findViewById(R.id.progress)
         // [START initialize_auth]
         // Initialize Firebase Auth
         auth = Firebase.auth
@@ -49,9 +47,11 @@ class RegisterActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
 
-                    val userID: String  = auth.currentUser?.uid.toString()
-                    database.child("Users").child(userID).setValue("")
+                    val userID  = auth.currentUser!!.uid
+                    val user = UserModel("",0)
 
+                    database.child("Users").child(userID).setValue(user)
+                    database.child("Posts").child(userID).setValue(user.username)
                     Log.d(ContentValues.TAG, "createUserWithEmail:success")
                     val intent = Intent(this, LoginActivity::class.java)
                     // start your next activity

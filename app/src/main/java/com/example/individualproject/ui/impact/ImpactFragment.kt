@@ -1,5 +1,6 @@
-package com.example.individualproject.ui.notifications
+package com.example.individualproject.ui.impact
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.individualproject.AddPostActivity
+import com.example.individualproject.TreeActivity
 import com.example.individualproject.databinding.FragmentNotificationsBinding
 
 class NotificationsFragment : Fragment() {
@@ -22,16 +25,24 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        val impactViewModel =
+            ViewModelProvider(this).get(ImpactViewModel::class.java)
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.treesPlanted
+        impactViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+        val plantTrees = binding.impactPlantTreesButton
+
+        plantTrees.setOnClickListener {
+            val intent = Intent(context, TreeActivity::class.java)
+            startActivity(intent)
+        }
+
         return root
     }
 

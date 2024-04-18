@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".DefaultActivity"
+    android:layout_margin="20dp"
     android:gravity="center"
-    android:layout_margin="20dp">
+    android:orientation="vertical"
+    tools:context=".DefaultActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -20,61 +20,47 @@
         android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="150dp"
-        android:layout_height="20dp"
-        android:layout_weight="10"
-        app:srcCompat="@drawable/chat_icon" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="5"
-        app:srcCompat="@drawable/chat_icon" />
+        android:layout_width="wrap_content"
+        android:layout_height="350dp"
+        android:layout_weight="0"
+        app:srcCompat="@drawable/impact_image" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:letterSpacing="0.08"
         android:text="@string/welcome"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textStyle="bold"
-        android:letterSpacing="0.08"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:letterSpacing="0.08"
+        android:paddingBottom="20dp"
         android:text="@string/help_trees_info"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <LinearLayout
+    <Button
+        android:id="@+id/loginButton"
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:gravity="bottom"
-        android:orientation="vertical"
-        android:layout_weight="10">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_rounded"
+        android:text="@string/Login" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
-            android:text="@string/Login"
-            android:id="@+id/loginButton"
-            android:layout_marginBottom="20dp"/>
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_rounded"
+        android:text="@string/register" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
-            android:text="@string/register"
-            android:id="@+id/registerButton"
-            android:layout_marginBottom="20dp"/>
-    </LinearLayout>
 </LinearLayout>
